@@ -14,10 +14,10 @@ DEFAULT_COLLECTION_NAME = "phonetic_rules"
 DEFAULT_DATABASE_PATH = "./chroma_db"
 
 
-def resolve_database_path(database_path: str | None = None) -> Path:
+def resolve_database_path(database_path: str | Path | None = None) -> Path:
     """Resolve and validate the local ChromaDB persistence path."""
     configured_path = database_path or os.getenv("CHROMA_DB_PATH", DEFAULT_DATABASE_PATH)
-    if not configured_path.strip():
+    if isinstance(configured_path, str) and not configured_path.strip():
         raise ValueError("The ChromaDB path cannot be empty.")
 
     path = Path(configured_path).expanduser()

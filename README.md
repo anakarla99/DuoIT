@@ -70,3 +70,16 @@ print(audio.sample_rate, audio.channels, audio.duration_seconds)
 
 It raises `AudioPreprocessingError` for empty, unreadable, non-finite, or
 silent audio instead of passing invalid input to the model.
+
+### Seed Phonetic Rules
+
+Seed the local collection with the initial English phonetic rules:
+
+```powershell
+python -m backend.knowledge.seed_data
+```
+
+The command is idempotent: it uses stable IDs and `upsert`, so running it
+again updates the existing rules instead of creating duplicates. The initial
+dataset covers TH sounds, English R, vowel contrasts, schwa, and final
+consonant release.
