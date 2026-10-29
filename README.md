@@ -42,3 +42,15 @@ The project targets Python 3.13 and pins its runtime dependencies in
 4. Copy [`.env.example`](.env.example) to `.env` and adjust local settings as needed.
 
 The `.env` file and the local `.venv` directory are ignored by Git.
+
+### Initialize the Knowledge Database
+
+From the project root, run:
+
+```powershell
+python -m backend.knowledge.init_db
+```
+
+This creates the local `chroma_db` directory and the `phonetic_rules`
+collection if they do not already exist. Existing data is preserved.
+The collection is intentionally empty until the phonetic seed-data task.

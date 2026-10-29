@@ -1,7 +1,7 @@
 # Project Execution Plan and Status
 
 - [ ] PHASE 1: ChromaDB Setup and Rules Dictionary
-  - [ ] Create the database initialization script.
+  - [x] Create the database initialization script.
   - [ ] Add seed data for phonetics.
   - [ ] Create a semantic search function.
 - [ ] PHASE 2: Audio Pipeline and Forced Alignment (CAPT)
