@@ -175,7 +175,8 @@ streamlit run frontend/app.py
 ```
 
 Open the displayed local URL, enter the expected text, provide an acting
-direction, upload a recording, and select **Analyze recording**. The first
-analysis downloads the configured Whisper and coach models into the local
-Hugging Face cache. The application does not send audio or database data to a
-cloud service.
+direction, select **Record your reading**, allow microphone access, and record
+your voice. You can also upload a recording as a fallback. Select
+**Analyze recording** when ready. The first analysis downloads the configured
+Whisper and coach models into the local Hugging Face cache. The application
+does not send audio or database data to a cloud service.

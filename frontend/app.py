@@ -134,10 +134,16 @@ def main() -> None:
         "Acting direction",
         value="Speak clearly and confidently.",
     )
-    audio_file = st.file_uploader(
-        "Upload a WAV, MP3, or supported audio recording",
+    st.subheader("Recording")
+    recorded_audio = st.audio_input(
+        "Record your reading",
+        help="Allow microphone access, record your reading, then stop recording.",
+    )
+    uploaded_audio = st.file_uploader(
+        "Or upload a recording",
         type=["wav", "mp3", "m4a", "flac", "ogg"],
     )
+    audio_file = recorded_audio or uploaded_audio
 
     if audio_file is not None:
         st.audio(audio_file)
@@ -145,7 +151,7 @@ def main() -> None:
     if not st.button("Analyze recording", type="primary"):
         return
     if audio_file is None:
-        st.error("Upload an audio recording before starting the analysis.")
+        st.error("Record your reading or upload an audio recording first.")
         return
 
     try:
