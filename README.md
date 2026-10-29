@@ -159,3 +159,23 @@ print(response.feedback)
 The default local model is `distilgpt2`, configurable with
 `COACH_MODEL_NAME`. The first real generation downloads that model into the
 local Hugging Face cache. Tests can inject a generator and avoid any download.
+
+## Run the Streamlit Application
+
+Initialize and seed the local knowledge database first:
+
+```powershell
+python -m backend.knowledge.seed_data
+```
+
+Then launch the interface:
+
+```powershell
+streamlit run frontend/app.py
+```
+
+Open the displayed local URL, enter the expected text, provide an acting
+direction, upload a recording, and select **Analyze recording**. The first
+analysis downloads the configured Whisper and coach models into the local
+Hugging Face cache. The application does not send audio or database data to a
+cloud service.
