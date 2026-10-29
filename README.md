@@ -54,3 +54,19 @@ python -m backend.knowledge.init_db
 This creates the local `chroma_db` directory and the `phonetic_rules`
 collection if they do not already exist. Existing data is preserved.
 The collection is intentionally empty until the phonetic seed-data task.
+
+### Preprocess Audio
+
+The audio preprocessing service loads a WAV-compatible audio source and
+normalizes it to the model requirements: 16 kHz, mono, finite `float32`
+samples.
+
+```python
+from backend.scorer.audio_preprocessing import preprocess_audio
+
+audio = preprocess_audio("recording.wav")
+print(audio.sample_rate, audio.channels, audio.duration_seconds)
+```
+
+It raises `AudioPreprocessingError` for empty, unreadable, non-finite, or
+silent audio instead of passing invalid input to the model.
