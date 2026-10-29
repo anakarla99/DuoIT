@@ -99,3 +99,21 @@ for result in results:
 Searches run against the local ChromaDB collection and return the closest
 rules with their metadata and distance. An optional `language="en"` filter is
 available. Empty queries and non-positive limits are rejected explicitly.
+
+### Transcribe Audio with Word Timestamps
+
+The scorer uses Whisper through the Hugging Face Transformers pipeline because
+Whisper supports word-level timestamps directly:
+
+```python
+from backend.scorer.transcription import transcribe_audio
+
+result = transcribe_audio("recording.wav")
+print(result.text)
+for word in result.words:
+    print(word.word, word.start_seconds, word.end_seconds)
+```
+
+The default model is `openai/whisper-small`. The first execution downloads the
+model into the local Hugging Face cache. No model is downloaded when the module
+is imported. For tests, inject a recognizer into `transcribe_audio`.
