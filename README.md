@@ -138,3 +138,24 @@ The current score is an intelligibility score based on sequential word
 matches and Whisper confidence. It is not a true phoneme-level GOP score;
 that requires forced alignment and acoustic logits, which will replace this
 scoring implementation when that model integration is added.
+
+### Dramatic Coach
+
+Generate local LLM feedback from pronunciation scores and retrieved phonetic
+rules:
+
+```python
+from core.drama_coach import DramaCoachRequest, generate_coaching
+
+request = DramaCoachRequest(
+    expected_text="Think clearly",
+    score_result=scores,
+    acting_direction="Sound determined but encouraging.",
+)
+response = generate_coaching(request)
+print(response.feedback)
+```
+
+The default local model is `distilgpt2`, configurable with
+`COACH_MODEL_NAME`. The first real generation downloads that model into the
+local Hugging Face cache. Tests can inject a generator and avoid any download.

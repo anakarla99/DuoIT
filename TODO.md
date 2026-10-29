@@ -9,4 +9,5 @@
   - [x] Load the Wav2Vec2/Whisper model and extract timestamps.
   - [x] Calculate the pronunciation score for each word.
 - [ ] PHASE 3: Dramatic Coach Orchestration (LLM)
+  - [x] Implement local LLM coaching orchestration.
 - [ ] PHASE 4: Graphical Interface (Streamlit) and Final Integration
