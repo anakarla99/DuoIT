@@ -83,3 +83,19 @@ The command is idempotent: it uses stable IDs and `upsert`, so running it
 again updates the existing rules instead of creating duplicates. The initial
 dataset covers TH sounds, English R, vowel contrasts, schwa, and final
 consonant release.
+
+### Search Phonetic Rules
+
+Query the seeded rules semantically:
+
+```python
+from backend.knowledge.semantic_search import search_phonetic_rules
+
+results = search_phonetic_rules("I replace the TH sound with a T")
+for result in results:
+    print(result.rule_id, result.metadata["title"], result.distance)
+```
+
+Searches run against the local ChromaDB collection and return the closest
+rules with their metadata and distance. An optional `language="en"` filter is
+available. Empty queries and non-positive limits are rejected explicitly.
