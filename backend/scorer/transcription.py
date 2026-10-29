@@ -28,6 +28,7 @@ class WordTimestamp:
     word: str
     start_seconds: float
     end_seconds: float
+    confidence: float | None = None
 
 
 @dataclass(frozen=True)
@@ -112,11 +113,23 @@ def _parse_word_timestamps(raw_result: dict[str, Any]) -> tuple[WordTimestamp, .
                 f"Invalid timestamp range for transcribed word {word!r}."
             )
 
+        confidence = chunk.get("confidence")
+        if confidence is not None:
+            if not isinstance(confidence, (int, float)) or not np.isfinite(confidence):
+                raise TranscriptionError(
+                    f"Invalid confidence for transcribed word {word!r}."
+                )
+            if not 0.0 <= float(confidence) <= 1.0:
+                raise TranscriptionError(
+                    f"Confidence must be between 0 and 1 for {word!r}."
+                )
+
         words.append(
             WordTimestamp(
                 word=word.strip(),
                 start_seconds=start_seconds,
                 end_seconds=end_seconds,
+                confidence=None if confidence is None else float(confidence),
             )
         )
 

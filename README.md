@@ -117,3 +117,24 @@ for word in result.words:
 The default model is `openai/whisper-small`. The first execution downloads the
 model into the local Hugging Face cache. No model is downloaded when the module
 is imported. For tests, inject a recognizer into `transcribe_audio`.
+
+### Score Pronunciation
+
+Compare expected text with the timestamped transcription:
+
+```python
+from backend.scorer.pronunciation_scoring import score_pronunciation
+from backend.scorer.transcription import transcribe_audio
+
+transcription = transcribe_audio("recording.wav")
+scores = score_pronunciation("Think clearly", transcription)
+
+for word in scores.words:
+    print(word.expected_word, word.score, word.passed)
+print(scores.failed_words)
+```
+
+The current score is an intelligibility score based on sequential word
+matches and Whisper confidence. It is not a true phoneme-level GOP score;
+that requires forced alignment and acoustic logits, which will replace this
+scoring implementation when that model integration is added.
