@@ -1,6 +1,44 @@
 # CAPT & Drama Coach AI
 
-Local application for practicing reading aloud in other languages, receiving precise phonetic corrections (Goodness of Pronunciation - GOP) and dramatic direction advice.
+> A local-first pronunciation and performance coach for language learners,
+> actors, and public speakers.
+
+CAPT & Drama Coach AI helps users practice reading aloud by recording their
+voice, transcribing speech with Whisper, identifying word-level pronunciation
+issues, retrieving relevant phonetic guidance from a local ChromaDB knowledge
+base, and generating practical dramatic-coaching feedback with a local
+language model.
+
+The project combines speech recognition, audio preprocessing, semantic search,
+and LLM orchestration in a modular Python application. It is designed to keep
+audio and knowledge data local while providing an interactive Streamlit
+experience.
+
+## What This Project Demonstrates
+
+- Building an end-to-end AI application around real audio input.
+- Normalizing microphone recordings to 16 kHz mono audio for model inference.
+- Extracting word-level timestamps with Hugging Face Whisper.
+- Scoring word-level intelligibility and identifying failed words.
+- Using ChromaDB for local semantic retrieval of phonetic rules.
+- Orchestrating retrieved knowledge and scoring results into actionable LLM
+  feedback.
+- Connecting modular backend services to a Streamlit user interface.
+
+## Key Features
+
+- Live microphone recording in the browser.
+- Optional WAV, MP3, M4A, FLAC, and OGG upload.
+- Word-level transcription and timestamps.
+- Pronunciation threshold scoring with configurable feedback.
+- Local phonetic-rule search with seeded English pronunciation guidance.
+- Dramatic direction suggestions for delivery, clarity, and performance.
+- Explicit validation for empty, silent, malformed, or incompatible inputs.
+
+> **Project status:** The local end-to-end prototype is implemented. The
+> current pronunciation metric is a word-level intelligibility score; a
+> phoneme-level Goodness of Pronunciation (GOP) implementation is planned for
+> a future scoring-model iteration.
 
 ## System Architecture
 - `/frontend`: User interface built with Streamlit.
